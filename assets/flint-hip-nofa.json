@@ -1,0 +1,45 @@
+{
+ "label": "flint-hip-nofa",
+ "model": "flint-40b-hip-nofa",
+ "build": "b388-d854d98",
+ "date": "2026-11-11 01:52:37",
+ "vram_idle_mib": 26512,
+ "runs": [
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 257.0,
+   "prefill_s": 1.99,
+   "gen_tokens": 256,
+   "gen_tps": 51.78,
+   "wall_s": 6.92,
+   "vram_mib": 26561
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 527.7,
+   "prefill_s": 7.76,
+   "gen_tokens": 256,
+   "gen_tps": 42.61,
+   "wall_s": 13.75,
+   "vram_mib": 27153
+  },
+  {
+   "prompt_tokens": 16384,
+   "prefill_tps": 584.8,
+   "prefill_s": 28.02,
+   "gen_tokens": 256,
+   "gen_tps": 33.11,
+   "wall_s": 35.72,
+   "vram_mib": 28875
+  },
+  {
+   "prompt_tokens": 32768,
+   "prefill_tps": 453.1,
+   "prefill_s": 72.31,
+   "gen_tokens": 256,
+   "gen_tps": 25.52,
+   "wall_s": 82.32,
+   "vram_mib": 29372
+  }
+ ]
+}

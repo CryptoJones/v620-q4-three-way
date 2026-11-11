@@ -1,0 +1,99 @@
+{
+ "label": "flint-ik",
+ "model": "flint-ik",
+ "build": null,
+ "date": "2026-11-11 01:58:48",
+ "vram_idle_mib": 30269,
+ "runs": [
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 886.0,
+   "prefill_s": 0.58,
+   "gen_tokens": 256,
+   "gen_tps": 33.63,
+   "wall_s": 8.19,
+   "vram_mib": 30307
+  },
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 940.1,
+   "prefill_s": 0.54,
+   "gen_tokens": 256,
+   "gen_tps": 33.91,
+   "wall_s": 8.1,
+   "vram_mib": 30307
+  },
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 948.5,
+   "prefill_s": 0.54,
+   "gen_tokens": 256,
+   "gen_tps": 33.25,
+   "wall_s": 8.24,
+   "vram_mib": 30307
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 474.6,
+   "prefill_s": 8.63,
+   "gen_tokens": 256,
+   "gen_tps": 32.23,
+   "wall_s": 16.58,
+   "vram_mib": 30307
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 513.2,
+   "prefill_s": 7.98,
+   "gen_tokens": 256,
+   "gen_tps": 32.26,
+   "wall_s": 15.93,
+   "vram_mib": 30307
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 512.7,
+   "prefill_s": 7.99,
+   "gen_tokens": 256,
+   "gen_tps": 32.2,
+   "wall_s": 15.94,
+   "vram_mib": 30307
+  },
+  {
+   "prompt_tokens": 16384,
+   "prefill_tps": 266.7,
+   "prefill_s": 61.44,
+   "gen_tokens": 256,
+   "gen_tps": 23.59,
+   "wall_s": 72.37,
+   "vram_mib": 30307
+  },
+  {
+   "prompt_tokens": 16384,
+   "prefill_tps": 252.0,
+   "prefill_s": 65.01,
+   "gen_tokens": 256,
+   "gen_tps": 24.76,
+   "wall_s": 75.91,
+   "vram_mib": 30307
+  },
+  {
+   "prompt_tokens": 32768,
+   "prefill_tps": 167.3,
+   "prefill_s": 195.9,
+   "gen_tokens": 256,
+   "gen_tps": 24.06,
+   "wall_s": 206.66,
+   "vram_mib": 30307
+  },
+  {
+   "prompt_tokens": 65536,
+   "prefill_tps": 93.5,
+   "prefill_s": 700.59,
+   "gen_tokens": 256,
+   "gen_tps": 19.8,
+   "wall_s": 713.57,
+   "vram_mib": 30307
+  }
+ ]
+}

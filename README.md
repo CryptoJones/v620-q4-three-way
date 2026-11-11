@@ -51,10 +51,32 @@ All three are abliterated (refusal-damped), all three quantized identically to Q
 3. **llama-server answers ANY requested model name with its single loaded model.** A client can request "flint" while a Qwen answers every token, silently, with no error possible. This exact phantom-label failure killed a previous trial. The driver now asserts the loaded path from `/props` before trusting a single number.
 4. **VRAM cap is 30 704 MiB, not 32 768, and overflow is fatal, not slow.** Past the cap, spill lands in the GTT (host RAM mapped into GPU page tables — every access crosses Thunderbolt), past ~700 MiB of GTT the first request triggers a PCIe AER storm, and the card drops off the bus until reboot. All three models here peak ≤ 20 745 MiB at 131k ctx with wide margin.
 
+## Engine peer test — is llama.cpp/Vulkan the right engine?
+
+Matching llama.cpp's own history proves reproducibility, not competence. So we ran the same model (Flint Q4), same harness, and each engine at the best configuration it can actually run on this card:
+
+| Prompt | llama.cpp **Vulkan** (baseline above) | llama.cpp **HIP/ROCm** | **ik_llama.cpp** (HIP) |
+|---:|---|---|---|
+| 512 | 696 / 26.4 | 257 / **51.8** | **948** / 33.2 |
+| 4k | **1104** / 24.3 | 528 / 42.6 | 513 / 32.2 |
+| 16k | **1055** / 22.9 | 585 / 33.1 | 252 / 24.8 |
+| 32k | **811** / 21.7 | 453 / 25.5 | 167 / 24.1 |
+| 65k | **694** / 15.4 | *OOM at 33k* | 94 / 19.8 |
+
+**Nobody sweeps, and the incumbent loses half the board.** At short context Vulkan is beaten on both axes — ik wins prefill (948 vs 696), HIP wins generation (51.8 vs 26.4, a 2× "tokens appear faster" win). At long context Vulkan wins outright and by a landslide: at 65k it prefills 7× faster than ik and is the only engine that reaches 65k at all.
+
+**What to live with:** for agentic coding with repo-sized prompts, stay on Vulkan — it is the only engine whose prefill does not collapse with depth. If the pain is waiting for tokens on short prompts, HIP's generation is a free 2×. ik's famous MoE speed shows up at short context and vanishes past 4k.
+
+**Honesty flags:**
+- **HIP is not a flag-identical A/B — it is "best runnable config."** Its flash-attention kernel asserts on gfx1030 (`max_blocks_per_sm > 0`), FA-off forces f16 KV (llama.cpp refuses quantized KV without FA), and f16 KV at 131k OOM'd — so HIP ran FA-off, f16 KV, 33k ceiling. Its 2× generation win is *understated*: f16 KV moves more bytes per token than Vulkan's q8_0, so the confound works against HIP.
+- **ik ran the intended config** (50/50 layers offloaded, FA on, q8_0 KV) but sat at 30 307 / 30 704 MiB VRAM — 98.7% of the usable cap, though only 16 MiB GTT, so it is not spilling; the long-context prefill collapse is real kernel behavior.
+- **HIP's two load-time crashes were Thunderbolt artifacts, not GPU failures.** First tensor upload threw illegal-memory-access until `HSA_ENABLE_SDMA=0`; both should disappear when the card moves to a native x16 slot.
+- Raw data: [`flint-hip-nofa.json`](assets/flint-hip-nofa.json) · [`flint-ik.json`](assets/flint-ik.json)
+
 ## Not measured (yet)
 
 - **Quality.** This repo measures speed honestly and says nothing about which model writes better code — the fixed coding-prompt battery (win/tie/loss, human-judged) is the planned companion. Speed alone always favors the sparse model; that's the trap this section exists to admit.
-- **HIP/ROCm backend.** A `build-hip-new` (gfx1030, `GGML_HIP_NO_VMM=ON`) exists on the host; a Vulkan-vs-HIP A/B is a 15-minute experiment.
+- **MLX-LM (ROCm).** A genuinely different engine (not llama.cpp-family); wants HF safetensors, not GGUF — all three models staged on the NAS for it. Arch support for Flint's custom Recursive design is unverified.
 - **MTP speculative decoding** for the MoEs (proven 2.4× on a different model on this card class).
 
 ## Provenance
