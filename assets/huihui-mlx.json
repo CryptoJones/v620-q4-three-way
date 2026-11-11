@@ -1,0 +1,99 @@
+{
+ "label": "huihui-mlx",
+ "model": "mlx-huihui-coder-30b-q4",
+ "build": "mlx-0.32.3.dev20261111+8436669",
+ "date": "2026-11-11 06:00:52",
+ "vram_idle_mib": 16710,
+ "runs": [
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 58.3,
+   "prefill_s": 8.79,
+   "gen_tokens": 256,
+   "gen_tps": 32.32,
+   "wall_s": 16.71,
+   "vram_mib": 18384
+  },
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 389.6,
+   "prefill_s": 1.31,
+   "gen_tokens": 256,
+   "gen_tps": 33.86,
+   "wall_s": 8.88,
+   "vram_mib": 18736
+  },
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 402.2,
+   "prefill_s": 1.27,
+   "gen_tokens": 256,
+   "gen_tps": 34.95,
+   "wall_s": 8.6,
+   "vram_mib": 18748
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 220.2,
+   "prefill_s": 18.6,
+   "gen_tokens": 256,
+   "gen_tps": 31.57,
+   "wall_s": 26.71,
+   "vram_mib": 19760
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 219.7,
+   "prefill_s": 18.64,
+   "gen_tokens": 256,
+   "gen_tps": 31.19,
+   "wall_s": 26.85,
+   "vram_mib": 19742
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 219.1,
+   "prefill_s": 18.69,
+   "gen_tokens": 256,
+   "gen_tps": 31.81,
+   "wall_s": 26.74,
+   "vram_mib": 19730
+  },
+  {
+   "prompt_tokens": 16384,
+   "prefill_tps": 80.9,
+   "prefill_s": 202.49,
+   "gen_tokens": 256,
+   "gen_tps": 24.4,
+   "wall_s": 212.98,
+   "vram_mib": 21998
+  },
+  {
+   "prompt_tokens": 16384,
+   "prefill_tps": 80.8,
+   "prefill_s": 202.72,
+   "gen_tokens": 256,
+   "gen_tps": 24.55,
+   "wall_s": 213.15,
+   "vram_mib": 21986
+  },
+  {
+   "prompt_tokens": 32768,
+   "prefill_tps": 43.9,
+   "prefill_s": 746.14,
+   "gen_tokens": 256,
+   "gen_tps": 19.02,
+   "wall_s": 759.6,
+   "vram_mib": 25058
+  },
+  {
+   "prompt_tokens": 65536,
+   "prefill_tps": 22.7,
+   "prefill_s": 2881.45,
+   "gen_tokens": 256,
+   "gen_tps": 13.24,
+   "wall_s": 2900.79,
+   "vram_mib": 27362
+  }
+ ]
+}

@@ -1,0 +1,99 @@
+{
+ "label": "huihui-ik",
+ "model": "huihui-coder-30b-ik",
+ "build": null,
+ "date": "2026-11-11 11:10:15",
+ "vram_idle_mib": 24785,
+ "runs": [
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 136.3,
+   "prefill_s": 3.76,
+   "gen_tokens": 256,
+   "gen_tps": 29.39,
+   "wall_s": 12.47,
+   "vram_mib": 24830
+  },
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 976.7,
+   "prefill_s": 0.52,
+   "gen_tokens": 256,
+   "gen_tps": 29.92,
+   "wall_s": 9.08,
+   "vram_mib": 24830
+  },
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 955.8,
+   "prefill_s": 0.54,
+   "gen_tokens": 256,
+   "gen_tps": 23.89,
+   "wall_s": 11.26,
+   "vram_mib": 24830
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 343.7,
+   "prefill_s": 11.92,
+   "gen_tokens": 256,
+   "gen_tps": 28.94,
+   "wall_s": 20.78,
+   "vram_mib": 24830
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 379.4,
+   "prefill_s": 10.8,
+   "gen_tokens": 256,
+   "gen_tps": 29.14,
+   "wall_s": 19.59,
+   "vram_mib": 24830
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 379.3,
+   "prefill_s": 10.8,
+   "gen_tokens": 256,
+   "gen_tps": 29.05,
+   "wall_s": 19.62,
+   "vram_mib": 24830
+  },
+  {
+   "prompt_tokens": 16384,
+   "prefill_tps": 109.0,
+   "prefill_s": 150.3,
+   "gen_tokens": 256,
+   "gen_tps": 21.38,
+   "wall_s": 162.3,
+   "vram_mib": 24830
+  },
+  {
+   "prompt_tokens": 16384,
+   "prefill_tps": 119.2,
+   "prefill_s": 137.45,
+   "gen_tokens": 256,
+   "gen_tps": 21.41,
+   "wall_s": 149.42,
+   "vram_mib": 24830
+  },
+  {
+   "prompt_tokens": 32768,
+   "prefill_tps": 62.0,
+   "prefill_s": 528.12,
+   "gen_tokens": 256,
+   "gen_tps": 16.02,
+   "wall_s": 544.13,
+   "vram_mib": 24830
+  },
+  {
+   "prompt_tokens": 65536,
+   "prefill_tps": 30.8,
+   "prefill_s": 2124.81,
+   "gen_tokens": 256,
+   "gen_tps": 10.52,
+   "wall_s": 2149.19,
+   "vram_mib": 24830
+  }
+ ]
+}

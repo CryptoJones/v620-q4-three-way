@@ -1,0 +1,45 @@
+{
+ "label": "ab27-hip-nofa",
+ "model": "ab27-hip-nofa",
+ "build": "b388-d854d98",
+ "date": "2026-11-11 14:33:19",
+ "vram_idle_mib": 19814,
+ "runs": [
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 96.7,
+   "prefill_s": 5.29,
+   "gen_tokens": 256,
+   "gen_tps": 18.26,
+   "wall_s": 19.27,
+   "vram_mib": 19870
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 388.6,
+   "prefill_s": 10.54,
+   "gen_tokens": 256,
+   "gen_tps": 18.0,
+   "wall_s": 24.71,
+   "vram_mib": 20315
+  },
+  {
+   "prompt_tokens": 16384,
+   "prefill_tps": 325.4,
+   "prefill_s": 50.35,
+   "gen_tokens": 256,
+   "gen_tps": 14.7,
+   "wall_s": 67.71,
+   "vram_mib": 24557
+  },
+  {
+   "prompt_tokens": 32768,
+   "prefill_tps": 257.4,
+   "prefill_s": 127.29,
+   "gen_tokens": 256,
+   "gen_tps": 11.94,
+   "wall_s": 148.66,
+   "vram_mib": 20584
+  }
+ ]
+}

@@ -1,0 +1,99 @@
+{
+ "label": "ab27-mlx",
+ "model": "mlx-ab27-q4",
+ "build": "mlx-0.32.3.dev20261111+8436669",
+ "date": "2026-11-11 07:38:41",
+ "vram_idle_mib": 15789,
+ "runs": [
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 37.9,
+   "prefill_s": 13.5,
+   "gen_tokens": 256,
+   "gen_tps": 10.24,
+   "wall_s": 38.5,
+   "vram_mib": 18178
+  },
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 77.7,
+   "prefill_s": 6.59,
+   "gen_tokens": 256,
+   "gen_tps": 10.22,
+   "wall_s": 31.65,
+   "vram_mib": 18350
+  },
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 78.1,
+   "prefill_s": 6.56,
+   "gen_tokens": 256,
+   "gen_tps": 10.24,
+   "wall_s": 31.55,
+   "vram_mib": 18634
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 88.2,
+   "prefill_s": 46.44,
+   "gen_tokens": 256,
+   "gen_tps": 10.09,
+   "wall_s": 71.82,
+   "vram_mib": 19248
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 88.8,
+   "prefill_s": 46.13,
+   "gen_tokens": 256,
+   "gen_tps": 7.69,
+   "wall_s": 79.44,
+   "vram_mib": 19218
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 84.8,
+   "prefill_s": 48.32,
+   "gen_tokens": 256,
+   "gen_tps": 10.1,
+   "wall_s": 73.66,
+   "vram_mib": 19146
+  },
+  {
+   "prompt_tokens": 16384,
+   "prefill_tps": 70.6,
+   "prefill_s": 232.15,
+   "gen_tokens": 256,
+   "gen_tps": 9.67,
+   "wall_s": 258.62,
+   "vram_mib": 22594
+  },
+  {
+   "prompt_tokens": 16384,
+   "prefill_tps": 67.4,
+   "prefill_s": 243.2,
+   "gen_tokens": 256,
+   "gen_tps": 9.66,
+   "wall_s": 269.7,
+   "vram_mib": 23263
+  },
+  {
+   "prompt_tokens": 32768,
+   "prefill_tps": 67.2,
+   "prefill_s": 487.91,
+   "gen_tokens": 256,
+   "gen_tps": 9.15,
+   "wall_s": 515.91,
+   "vram_mib": 27308
+  },
+  {
+   "prompt_tokens": 65536,
+   "prefill_tps": 56.9,
+   "prefill_s": 1152.13,
+   "gen_tokens": 256,
+   "gen_tps": 8.31,
+   "wall_s": 1182.95,
+   "vram_mib": 27774
+  }
+ ]
+}

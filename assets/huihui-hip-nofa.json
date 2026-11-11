@@ -1,0 +1,45 @@
+{
+ "label": "huihui-hip-nofa",
+ "model": "huihui-coder-30b-hip-nofa",
+ "build": "b388-d854d98",
+ "date": "2026-11-11 14:06:12",
+ "vram_idle_mib": 23206,
+ "runs": [
+  {
+   "prompt_tokens": 512,
+   "prefill_tps": 695.5,
+   "prefill_s": 0.74,
+   "gen_tokens": 256,
+   "gen_tps": 44.22,
+   "wall_s": 6.51,
+   "vram_mib": 23255
+  },
+  {
+   "prompt_tokens": 4096,
+   "prefill_tps": 928.6,
+   "prefill_s": 4.41,
+   "gen_tokens": 256,
+   "gen_tps": 49.12,
+   "wall_s": 9.61,
+   "vram_mib": 23848
+  },
+  {
+   "prompt_tokens": 16384,
+   "prefill_tps": 404.4,
+   "prefill_s": 40.51,
+   "gen_tokens": 256,
+   "gen_tps": 23.36,
+   "wall_s": 51.44,
+   "vram_mib": 29500
+  },
+  {
+   "prompt_tokens": 32768,
+   "prefill_tps": 239.2,
+   "prefill_s": 137.02,
+   "gen_tokens": 256,
+   "gen_tps": 13.68,
+   "wall_s": 155.67,
+   "vram_mib": 30625
+  }
+ ]
+}
