@@ -105,6 +105,55 @@ We are empiricists. Matching llama.cpp's own history proves reproducibility, not
 
 ---
 
+## The Recommendation: Which Route to Run
+
+Empirical measurement reveals that no single engine or model sweeps all contexts. The best route splits cleanly into two distinct operating paths:
+
+```mermaid
+flowchart TD
+    Task["Local LLM Workload"] --> Ctx{"Working Context Depth"}
+    Ctx -->|"Short to Medium Context: up to 16k-32k"| RouteA["Route A: Maximum Interactive Decode Speed\nEngine: llama.cpp HIP (build-hip-new)\nModel: Huihui-Coder-30B or Flint 40B\nConfig: -ngl 99 -c 32768 -fa off (f16 KV)"]
+    Ctx -->|"Deep Ingestion: 16k up to 131k"| RouteB["Route B: High-Throughput Long-Context Prefill\nEngine: llama.cpp Vulkan (build-vulkan-new)\nModel: Flint 40B\nConfig: -ngl 99 -c 131072 -fa on -ctk q8_0 -ctv q8_0"]
+```
+
+### Route A: Interactive Coding & Chat Loops (Context ≤ 16k–32k)
+
+* **Engine:** Upstream `llama.cpp` HIP (`build-hip-new`)
+* **Primary Model:** **`Huihui-Qwen3-Coder-30B`** (or **`Flint-40B-A2.5B`**)
+* **Flag Configuration:** `-ngl 99 -c 32768 -fa off` (f16 KV cache)
+* **Why it wins:**
+  * **Decode velocity is king:** Interactive coding agent loops depend entirely on generation speed. Upstream HIP hits **49.1 t/s** on Huihui (a **+47% speedup** over Vulkan's 33.3 t/s) and **51.8 t/s** on Flint (**nearly 2.0× faster** than Vulkan's 26.5 t/s).
+  * Prefill is plenty fast at interactive depths (528–929 t/s at ≤4k context, loading a 4k context window in ~4–7 seconds).
+  * **The operational boundary:** Because upstream HIP FlashAttention asserts on RDNA2/gfx1030 (`fattn-common.cuh:1138`), it must run with `-fa off`, forcing unquantized f16 KV cache. In 32 GB VRAM, that caps context at **~33k tokens** before GTT spill triggers a fatal Thunderbolt AER disconnect. If your agent runs stay under 32k, this is by far the fastest, snappiest engine.
+
+### Route B: Heavy Repo Mining & Deep Document Analysis (Context 16k to 131k)
+
+* **Engine:** `llama.cpp` Vulkan (`build-vulkan-new`)
+* **Primary Model:** **`Flint-40B-A2.5B`**
+* **Flag Configuration:** `-ngl 99 -c 131072 -fa on -ctk q8_0 -ctv q8_0`
+* **Why it wins:**
+  * **Prefill dominates deep context:** When evaluating 32k to 65k tokens (large codebase slices or full repo diffs), generation speed is irrelevant if you wait 10 to 45 minutes just to ingest the prompt.
+  * At 65k depth, **Vulkan prefills Flint at 694 t/s (93 seconds)**. By contrast, `ik_llama.cpp` drops to **94 t/s (11.5 minutes)**, and MLX on Huihui drops to **23 t/s (47 minutes)**.
+  * Vulkan's FlashAttention + `q8_0` KV cache runs stably all the way to **131k context** while staying comfortably below 21 GB VRAM (zero risk of touching the fatal 30.7 GB VRAM cap).
+
+### Model Selection Guide
+
+1. **`Huihui-Qwen3-Coder-30B` (Best Daily Coding Specialist):**
+   * Lightest footprint among the MoEs (18.6 GB weights), leaving ample VRAM headroom.
+   * Delivers 49.1 t/s generation on HIP and 929–1272 t/s prefill at ≤4k. Highly tuned instruction following for software engineering.
+2. **`Flint-40B-A2.5B` (Best Deep-Context & Large-Scale Agent):**
+   * Delivers 51.8 t/s generation on HIP and maintains 694–1104 t/s prefill under Vulkan compute shaders all the way out to 65k depth. The recursive routing scales exceptionally well under Vulkan.
+3. **`Qwen3.8-27B Heretic` (Dense "Brains" Fallback):**
+   * Runs at **18.0–18.3 t/s** on HIP and **9–11 t/s** on Vulkan.
+   * Reserve this strictly for workloads demanding dense reasoning coherence where MoE routing might drop nuance; otherwise, you pay an empirical **2.5× to 3× speed tax** on token generation compared to the MoEs.
+
+### Engines to Avoid for Primary Production
+
+* **`ik_llama.cpp` (HIP):** Strong short prompt prefill (956 t/s at 512), but suffers catastrophic prefill collapse at depth (drops 31× to 30.8 t/s at 65k on Huihui). Generation is also 20 t/s slower than upstream HIP.
+* **`MLX-LM` (ROCm):** Great proof-of-concept on RDNA2, but Flint is architecturally unsupported, generation tops out at 10–35 t/s, and long context requires chunked prefill (`prefill_step_size=512`) to prevent intermediate activation OOM.
+
+---
+
 ## Method
 
 - **Host:** ronin28 (Lenovo, Ryzen AI laptop-class host) with Radeon Pro V620 32 GB in a Thunderbolt 4 dock (Navi 21, gfx1030, PCIe Gen4 x16 negotiated at 16 GT/s).
